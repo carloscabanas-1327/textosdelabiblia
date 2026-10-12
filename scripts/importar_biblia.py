@@ -20,7 +20,7 @@ if len(data)>=45_000_000: raise RuntimeError('Archivo demasiado grande')
 z=zipfile.ZipFile(io.BytesIO(data))
 files={pathlib.PurePosixPath(n).name.lower():n for n in z.namelist() if not n.endswith('/')}
 # Haiola exports book/chapter HTML as GEN01.htm, EXO01.htm, etc.
-missing=[f'{code}{chapter:02d}.htm' for _,code,n in BOOKS for chapter in range(1,n+1) if f'{code}{chapter:02d}.htm'.lower() not in files]
+missing=[f'{code}{chapter:0{3 if code=="PSA" else 2}d}.htm' for _,code,n in BOOKS for chapter in range(1,n+1) if f'{code}{chapter:0{3 if code=="PSA" else 2}d}.htm'.lower() not in files]
 if missing: raise RuntimeError(f'La fuente no tiene {len(missing)} capítulos esperados. Primeros: {missing[:8]}')
 
 out=ROOT/'biblia'/'rv1909'
