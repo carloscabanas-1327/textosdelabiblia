@@ -1,5 +1,5 @@
 name: Importar Biblia RV1909
-on:
+'on':
   workflow_dispatch:
 permissions:
   contents: write
